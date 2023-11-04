@@ -1,19 +1,18 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import {
   SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
-  Text,
   useColorScheme,
   View,
+  Appearance,
 } from 'react-native';
 import { Section } from '../components/Section';
+import { Toggle } from '../components/Toggle';
 import {
   Colors,
-  DebugInstructions,
   Header,
-  LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
@@ -24,6 +23,11 @@ export const HomeScreen = () => {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
+  const toggleScheme = useCallback(() => {
+    const newScheme = isDarkMode ? 'light' : 'dark';
+    Appearance.setColorScheme(newScheme);
+  }, [isDarkMode]);
+
   return (
     <SafeAreaView style={backgroundStyle}>
       <StatusBar
@@ -32,26 +36,20 @@ export const HomeScreen = () => {
       />
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
+        style={backgroundStyle}
+      >
         <Header />
         <View
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
           <Section title="See Your Changes">
             <ReloadInstructions />
           </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
+          <Toggle
+            onToggle={toggleScheme}
+            enabled={!isDarkMode}
+          />
         </View>
       </ScrollView>
     </SafeAreaView>
