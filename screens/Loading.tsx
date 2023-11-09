@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -6,13 +6,28 @@ import {
   ActivityIndicator,
   View,
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+
+const DELAY = 10000;
 
 export const LoadingScreen = () => {
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      navigation.navigate('Home' as never);   // Todo: add nav prop type
+    }, DELAY);
+
+    return () => {
+      clearTimeout(timeout);
+    }
+  }, [navigation])
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.loading}>
         <Text style={styles.loadingText}>
-          Loading
+          Peacotum
         </Text>
         <ActivityIndicator
           size={'large'}
