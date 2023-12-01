@@ -8,7 +8,7 @@ import {
 import { useThemeStyle } from '../hooks/useThemeStyle';
 
 type ViewProps = {
-  style: StyleProp<ViewStyle>;
+  style?: StyleProp<ViewStyle>;
   children: any;
 };
 

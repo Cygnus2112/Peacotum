@@ -1,17 +1,16 @@
-import React from 'react';
 import {
   useColorScheme,
   ColorSchemeName,
 } from 'react-native';
 
 const lightTheme = {
-  color: '#4169e1',
-  backgroundColor: '#efe7db',
+  color: '#800080',
+  backgroundColor: '#e9eae7',
 }
 
 const darkTheme = {
-  color: 'white',
-  backgroundColor: 'black',
+  color: '#e9eae7',
+  backgroundColor: '#800080',
 }
 // Todo: icon color, etc.
 
