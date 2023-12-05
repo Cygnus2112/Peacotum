@@ -15,7 +15,7 @@ export const LoadingScreen = () => {
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      navigation.navigate('Home' as never);   // Todo: add nav prop type
+      navigation.navigate('Root' as never);   // Todo: add nav prop type
     }, DELAY);
 
     return () => {

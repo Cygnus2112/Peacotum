@@ -9,7 +9,7 @@ import { useThemeStyle } from '../hooks/useThemeStyle';
 
 type ViewProps = {
   style?: StyleProp<ViewStyle>;
-  children: any;
+  children?: any;
 };
 
 export const View = ({ style, children }: ViewProps) => {

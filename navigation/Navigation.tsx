@@ -3,7 +3,7 @@ import {
 } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import { HomeScreen } from '../screens/Home';
+import BottomBarNav from './BottomBarNav';
 import { LoadingScreen } from '../screens/Loading';
 
 const Stack = createNativeStackNavigator();
@@ -17,7 +17,7 @@ const Navigation = () => {
         }}
       >
         <Stack.Screen name="Loading" component={LoadingScreen} />
-        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Root" component={BottomBarNav} />
       </Stack.Navigator>
     </NavigationContainer>
   );

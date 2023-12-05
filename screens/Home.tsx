@@ -5,22 +5,32 @@ import {
   StatusBar,
   StyleSheet,
   useColorScheme,
-  View,
   Appearance,
+  FlatList
 } from 'react-native';
 import { Section } from '../components/Section';
 import { Toggle } from '../components/Toggle';
 import {
-  Colors,
   Header,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
+import { View } from '../components/View';
+
+import { useThemeStyle } from '../hooks/useThemeStyle';
+
+const arr = new Array(8).fill(true);
+
 export const HomeScreen = () => {
-  const isDarkMode = useColorScheme() === 'dark';
+  const scheme = useColorScheme();
+  console.log('scheme: ', scheme)
+  const isDarkMode = scheme === 'dark';
+
+  const themeStyles = useThemeStyle();
+  console.log('them st ', themeStyles)
 
   const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+    backgroundColor: themeStyles.backgroundColor,
   };
 
   const toggleScheme = useCallback(() => {
@@ -29,20 +39,18 @@ export const HomeScreen = () => {
   }, [isDarkMode]);
 
   return (
-    <SafeAreaView style={[styles.container, backgroundStyle]}>
+    <View style={[styles.container, backgroundStyle]}>
       <StatusBar
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
         backgroundColor={backgroundStyle.backgroundColor}
       />
+
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         style={backgroundStyle}
       >
         <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
+        <View>
           <Section title="See Your Changes">
             <ReloadInstructions />
           </Section>
@@ -52,7 +60,7 @@ export const HomeScreen = () => {
           />
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 }
 
