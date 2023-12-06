@@ -1,4 +1,4 @@
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, useColorScheme } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -7,6 +7,7 @@ import { useThemeStyle } from '../hooks/useThemeStyle';
 import { HomeScreen } from '../screens/Home';
 
 import Home from '../assets/home.svg';
+import HomeWhite from '../assets/home-white.svg';
 
 const Tab = createBottomTabNavigator();
 
@@ -17,21 +18,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: '100%',
     elevation: 0
-  },
-  badge: {
-    // unset some react navigation styles
-    minWidth: undefined,
-    paddingHorizontal: undefined,
-    lineHeight: undefined,
-   // backgroundColor: COLORS.GREEN,
-   // fontFamily: FONTS.BOLD,
-    fontSize: 9,
-    top: -8,
-    left: 2,
-    height: 16,
-    width: 16,
-    borderRadius: 8,
-   // paddingTop: IS_ANDROID ? 1.5 : 2.5
   },
   navIcon: {
     flex: 1,
@@ -47,11 +33,11 @@ const NavBarIcon = () => {
   const backgroundStyle = {
     backgroundColor: themeStyles.backgroundColor,
   };
-  const fillColor = themeStyles.color;
-  console.log('fillColor ', fillColor)
+  const scheme = useColorScheme();
+
   return (
     <View style={[styles.navIcon, backgroundStyle]}>
-      <Home width={24} height={24} fill={fillColor} />
+      {scheme === 'light' ? (<Home width={24} height={24} />) : (<HomeWhite width={24} height={24} />)}
     </View>
   )
 }
@@ -77,6 +63,13 @@ const BottomBarNav = () => {
     >
       <Tab.Screen
         name="Home"
+        options={{
+          tabBarIcon: NavBarIcon
+        }}
+        component={HomeScreen}
+      />
+      <Tab.Screen
+        name="Home2"
         options={{
           tabBarIcon: NavBarIcon
         }}
