@@ -55,7 +55,6 @@ const BottomBarNav = () => {
   return (
     <Tab.Navigator
       screenOptions={{
-        headerShown: false,
         tabBarShowLabel: false,
         tabBarStyle: [styles.bar, backgroundStyle, { height: tabHeight }]
       }}
@@ -64,14 +63,44 @@ const BottomBarNav = () => {
       <Tab.Screen
         name="Home"
         options={{
-          tabBarIcon: NavBarIcon
+          tabBarIcon: NavBarIcon,
+          tabBarStyle: {
+            borderTopColor: 'rgba(0, 0, 0, 0.1)',
+            borderTopWidth: 1,
+            backgroundColor: themeStyles.backgroundColor,
+          },
+          title: 'Peacotum',
+          headerStyle: {
+            borderBottomColor: 'rgba(0, 0, 0, 0.1)',
+            borderBottomWidth: 1,
+            backgroundColor: themeStyles.backgroundColor,
+          },
+          headerTitleStyle: {
+            color: themeStyles.color,
+            fontSize: 20,
+          },
         }}
         component={HomeScreen}
       />
       <Tab.Screen
-        name="Home2"
+        name="Alerts"
         options={{
-          tabBarIcon: NavBarIcon
+          tabBarIcon: NavBarIcon,
+          tabBarStyle: {
+            borderTopColor: 'rgba(0, 0, 0, 0.1)',
+            borderTopWidth: 1,
+            backgroundColor: themeStyles.backgroundColor,
+          },
+          title: 'Peacotum',
+          headerStyle: {
+            borderBottomColor: 'rgba(0, 0, 0, 0.1)',
+            borderBottomWidth: 1,
+            backgroundColor: themeStyles.backgroundColor,
+          },
+          headerTitleStyle: {
+            color: themeStyles.color,
+            fontSize: 20,
+          },
         }}
         component={HomeScreen}
       />
