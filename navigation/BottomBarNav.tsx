@@ -14,10 +14,18 @@ const Tab = createBottomTabNavigator();
 const BOTTOM_TABS_HEIGHT = 48;
 const styles = StyleSheet.create({
   bar: {
-    borderTopWidth: 0,
     position: 'absolute',
     width: '100%',
-    elevation: 0
+    elevation: 0,
+    borderTopColor: 'rgba(0, 0, 0, 0.1)',
+    borderTopWidth: 1,
+  },
+  header: {
+    borderBottomColor: 'rgba(0, 0, 0, 0.1)',
+    borderBottomWidth: 1,
+  },
+  headerTitle: {
+    fontSize: 20,
   },
   navIcon: {
     flex: 1,
@@ -56,7 +64,10 @@ const BottomBarNav = () => {
     <Tab.Navigator
       screenOptions={{
         tabBarShowLabel: false,
-        tabBarStyle: [styles.bar, backgroundStyle, { height: tabHeight }]
+        tabBarStyle: [styles.bar, backgroundStyle, { height: tabHeight }],
+        headerStyle: [styles.header, backgroundStyle],
+        headerTitleStyle: [styles.headerTitle, {color: themeStyles.color}],
+        title: 'Peacotum',
       }}
       initialRouteName="Home"
     >
@@ -64,21 +75,6 @@ const BottomBarNav = () => {
         name="Home"
         options={{
           tabBarIcon: NavBarIcon,
-          tabBarStyle: {
-            borderTopColor: 'rgba(0, 0, 0, 0.1)',
-            borderTopWidth: 1,
-            backgroundColor: themeStyles.backgroundColor,
-          },
-          title: 'Peacotum',
-          headerStyle: {
-            borderBottomColor: 'rgba(0, 0, 0, 0.1)',
-            borderBottomWidth: 1,
-            backgroundColor: themeStyles.backgroundColor,
-          },
-          headerTitleStyle: {
-            color: themeStyles.color,
-            fontSize: 20,
-          },
         }}
         component={HomeScreen}
       />
@@ -86,21 +82,6 @@ const BottomBarNav = () => {
         name="Alerts"
         options={{
           tabBarIcon: NavBarIcon,
-          tabBarStyle: {
-            borderTopColor: 'rgba(0, 0, 0, 0.1)',
-            borderTopWidth: 1,
-            backgroundColor: themeStyles.backgroundColor,
-          },
-          title: 'Peacotum',
-          headerStyle: {
-            borderBottomColor: 'rgba(0, 0, 0, 0.1)',
-            borderBottomWidth: 1,
-            backgroundColor: themeStyles.backgroundColor,
-          },
-          headerTitleStyle: {
-            color: themeStyles.color,
-            fontSize: 20,
-          },
         }}
         component={HomeScreen}
       />
