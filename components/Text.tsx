@@ -2,17 +2,20 @@ import React from 'react';
 import {
   Text as RNText,
   StyleProp,
-  TextStyle
+  TextStyle,
+  TextProps,
 } from 'react-native';
 
 import { useThemeStyle } from '../hooks/useThemeStyle';
 
-type TextProps = {
+type ITextProps = {
   style?: StyleProp<TextStyle>;
   children: any;
+  props?: TextProps;
+  numberOfLines?: number;
 };
 
-export const Text = ({ style, children }: TextProps) => {
+export const Text = ({ style, children, numberOfLines }: ITextProps) => {
   const themeStyles = useThemeStyle();
 
   const textStyle = {
@@ -20,7 +23,7 @@ export const Text = ({ style, children }: TextProps) => {
   };
 
   return (
-    <RNText style={[textStyle, style]}>
+    <RNText style={[textStyle, style]} numberOfLines={numberOfLines}>
       { children }
     </RNText>
   );
