@@ -29,6 +29,14 @@ const data: IMachine = {
   inventory: [],
 }
 
+const data2: IMachine = {
+  title: 'Cedars Waiting Room',
+  address: '1234 Fake Avenue, Ste #100, Los Angeles, CA',
+  type: 'Beverage',
+  imageUrl: 'fakeurl',
+  inventory: [],
+}
+
 export const HomeScreen = () => {
   const scheme = useColorScheme();
   const isDarkMode = scheme === 'dark';
@@ -56,10 +64,8 @@ export const HomeScreen = () => {
         style={backgroundStyle}
       >
         <Machine machine={data} />
+        <Machine machine={data2} />
         <View>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
           <Toggle
             onToggle={toggleScheme}
             enabled={!isDarkMode}

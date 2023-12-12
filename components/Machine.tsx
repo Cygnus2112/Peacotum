@@ -6,6 +6,7 @@ import {
 
 import { Text } from './Text';
 import { View } from './View';
+import { useThemeStyle } from '../hooks/useThemeStyle';
 
 type Product = {
   name: string;
@@ -29,6 +30,10 @@ type MachineProps = PropsWithChildren<{
 
 export const Machine = ({ machine }: MachineProps) => {
   const { title, type, address } = machine;
+  const { listItemColor } = useThemeStyle();
+  const textColor = {
+    color: listItemColor,
+  };
 
   return (
     <View style={styles.container}>
@@ -40,13 +45,13 @@ export const Machine = ({ machine }: MachineProps) => {
         resizeMode="contain"
       />
       <View style={styles.info}>
-        <Text style={styles.title} numberOfLines={1}>
+        <Text style={[styles.title, textColor]} numberOfLines={1}>
           {title}
         </Text>
-        <Text style={styles.address} numberOfLines={1}>
+        <Text style={[styles.address, textColor]} numberOfLines={1}>
           {address}
         </Text>
-        <Text style={styles.type}>
+        <Text style={[styles.type, textColor]}>
           {type}
         </Text>
       </View>
@@ -61,18 +66,16 @@ const styles = StyleSheet.create({
     width: '100%',
     paddingHorizontal: 5,
     paddingVertical: 8,
-    marginVertical: 5,
-    borderBottomColor: 'rgba(0, 0, 0, 0.3)',
-    borderTopColor: 'rgba(0, 0, 0, 0.3)',
+    borderBottomColor: 'rgba(0, 0, 0, 0.1)',
     borderBottomWidth: 1,
-    borderTopWidth: 1,
   },
   image: {
-    borderColor: 'rgba(0, 0, 0, 0.5)',
+    borderColor: 'rgba(0, 0, 0, 0.3)',
     borderRadius: 5,
     borderWidth: 1,
     height: 50,
     width: 50,
+    backgroundColor: 'white',
   },
   info: {
     flexDirection: 'column',
