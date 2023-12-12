@@ -58,18 +58,17 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    height: 65, 
     width: '100%',
     paddingHorizontal: 5,
-    paddingVertical: 2,
+    paddingVertical: 8,
     marginVertical: 5,
-    borderBottomColor: 'black',
-    borderTopColor: 'black',
+    borderBottomColor: 'rgba(0, 0, 0, 0.3)',
+    borderTopColor: 'rgba(0, 0, 0, 0.3)',
     borderBottomWidth: 1,
     borderTopWidth: 1,
   },
   image: {
-    borderColor: 'black',
+    borderColor: 'rgba(0, 0, 0, 0.5)',
     borderRadius: 5,
     borderWidth: 1,
     height: 50,
@@ -82,7 +81,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 16,
-    fontWeight: '500',
+    fontWeight: '600',
     overflow: 'hidden',
   },
   address: {
