@@ -1,25 +1,16 @@
 import React, { useCallback } from 'react';
 import {
   SafeAreaView,
-  ScrollView,
-  StatusBar,
   StyleSheet,
   useColorScheme,
   Appearance,
   FlatList
 } from 'react-native';
-import { Section } from '../components/Section';
 import { Toggle } from '../components/Toggle';
-import {
-  Header,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
 import { View } from '../components/View';
-
+import { MachineListItem, IMachine } from '../components/Machine';
 
 import { useThemeStyle } from '../hooks/useThemeStyle';
-import { Machine, IMachine } from '../components/Machine';
 
 const data: IMachine = {
   title: 'Civic Center Lobby',
@@ -37,10 +28,11 @@ const data2: IMachine = {
   inventory: [],
 }
 
+const machines = [data, data2];
+
 export const HomeScreen = () => {
   const scheme = useColorScheme();
   const isDarkMode = scheme === 'dark';
-
   const themeStyles = useThemeStyle();
 
   const backgroundStyle = {
@@ -54,24 +46,19 @@ export const HomeScreen = () => {
 
   return (
     <View style={[styles.container, backgroundStyle]}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
+      <View>
+        <Toggle
+          onToggle={toggleScheme}
+          enabled={!isDarkMode}
+        />
+      </View>
+      <FlatList
+        contentContainerStyle={backgroundStyle}
+        data={machines}
+        renderItem={({item, index}) => {
+          return <MachineListItem machine={item} key={index.toString()} />
+        }}
       />
-
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}
-      >
-        <Machine machine={data} />
-        <Machine machine={data2} />
-        <View>
-          <Toggle
-            onToggle={toggleScheme}
-            enabled={!isDarkMode}
-          />
-        </View>
-      </ScrollView>
     </View>
   );
 }

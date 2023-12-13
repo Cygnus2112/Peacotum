@@ -28,15 +28,18 @@ type MachineProps = PropsWithChildren<{
   machine: IMachine;
 }>;
 
-export const Machine = ({ machine }: MachineProps) => {
+export const MachineListItem = ({ machine }: MachineProps) => {
   const { title, type, address } = machine;
-  const { listItemColor } = useThemeStyle();
+  const { listItemColor, listItemBorderColor } = useThemeStyle();
   const textColor = {
     color: listItemColor,
   };
+  const borderColor = {
+    borderBottomColor: listItemBorderColor,
+  }
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, borderColor]}>
       <Image
         source={require('../assets/vending-machine.jpeg')} // will change to imageUrl
         style={styles.image}
@@ -66,7 +69,6 @@ const styles = StyleSheet.create({
     width: '100%',
     paddingHorizontal: 5,
     paddingVertical: 8,
-    borderBottomColor: 'rgba(0, 0, 0, 0.1)',
     borderBottomWidth: 1,
   },
   image: {
