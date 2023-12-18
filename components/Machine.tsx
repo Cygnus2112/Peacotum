@@ -1,12 +1,14 @@
-import React, { PropsWithChildren } from 'react';
+import React, { PropsWithChildren, useCallback } from 'react';
 import {
   StyleSheet,
   Image,
+  Pressable,
 } from 'react-native';
 
 import { Text } from './Text';
 import { View } from './View';
 import { useThemeStyle } from '../hooks/useThemeStyle';
+import { useNavigation } from '@react-navigation/native';
 
 type Product = {
   name: string;
@@ -31,6 +33,12 @@ type MachineProps = PropsWithChildren<{
 export const MachineListItem = ({ machine }: MachineProps) => {
   const { title, type, address } = machine;
   const { listItemColor, listItemBorderColor } = useThemeStyle();
+  const navigation = useNavigation();
+
+  const handlePress = useCallback(() => {
+    navigation.navigate('Machine' as never) // Todo: typing
+  }, [navigation]);
+
   const textColor = {
     color: listItemColor,
   };
@@ -39,26 +47,28 @@ export const MachineListItem = ({ machine }: MachineProps) => {
   }
 
   return (
-    <View style={[styles.container, borderColor]}>
-      <Image
-        source={require('../assets/vending-machine.jpeg')} // will change to imageUrl
-        style={styles.image}
-        height={50}
-        width={50}
-        resizeMode="contain"
-      />
-      <View style={styles.info}>
-        <Text style={[styles.title, textColor]} numberOfLines={1}>
-          {title}
-        </Text>
-        <Text style={[styles.address, textColor]} numberOfLines={1}>
-          {address}
-        </Text>
-        <Text style={[styles.type, textColor]}>
-          {type}
-        </Text>
+    <Pressable onPress={handlePress}>
+      <View style={[styles.container, borderColor]}>
+        <Image
+          source={require('../assets/vending-machine.jpeg')} // will change to imageUrl
+          style={styles.image}
+          height={50}
+          width={50}
+          resizeMode="contain"
+        />
+        <View style={styles.info}>
+          <Text style={[styles.title, textColor]} numberOfLines={1}>
+            {title}
+          </Text>
+          <Text style={[styles.address, textColor]} numberOfLines={1}>
+            {address}
+          </Text>
+          <Text style={[styles.type, textColor]}>
+            {type}
+          </Text>
+        </View>
       </View>
-    </View>
+    </Pressable>
   );
 }
 
@@ -68,7 +78,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '100%',
     paddingHorizontal: 5,
-    paddingVertical: 8,
+    paddingVertical: 12,
     borderBottomWidth: 1,
   },
   image: {

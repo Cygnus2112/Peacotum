@@ -5,7 +5,6 @@ import {
   ScrollView,
 } from 'react-native';
 import { Text } from '../components/Text';
-import { MachineListItem, IMachine } from '../components/Machine';
 
 import { useThemeStyle } from '../hooks/useThemeStyle';
 
