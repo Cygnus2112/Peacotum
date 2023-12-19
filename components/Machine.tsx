@@ -36,7 +36,7 @@ export const MachineListItem = ({ machine }: MachineProps) => {
   const navigation = useNavigation();
 
   const handlePress = useCallback(() => {
-    navigation.navigate('Machine' as never) // Todo: typing
+    navigation.navigate('Machine', { item: machine }) // Todo: typing
   }, [navigation]);
 
   const textColor = {
