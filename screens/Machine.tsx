@@ -9,6 +9,7 @@ import { View } from '../components/View';
 import { IMachine } from '../components/Machine';
 
 import { useThemeStyle } from '../hooks/useThemeStyle';
+import { Inventory } from '../components/Inventory';
 
 export const MachineScreen = ({ route }) => { // Todo: typing
   const themeStyles = useThemeStyle();
@@ -31,6 +32,7 @@ export const MachineScreen = ({ route }) => { // Todo: typing
         <View style={styles.section}>
           <Text style={styles.addressText}>{type}</Text>
         </View>
+        <Inventory inventory={inventory} />
       </ScrollView>
     </SafeAreaView>
   );

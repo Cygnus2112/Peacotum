@@ -17,7 +17,36 @@ const data: IMachine = {
   address: '1234 Fake Avenue, Ste #100, Los Angeles, CA',
   type: 'Snack',
   imageUrl: 'fakeurl',
-  inventory: [],
+  inventory: [
+    {
+      name: 'Coca-Cola',
+      type: 'beverage',
+      imageUrl: 'asdfasdf',
+      sku: 'asdfasdf',
+      quantity: 6,
+    },
+    {
+      name: 'Diet Coke',
+      type: 'beverage',
+      imageUrl: 'asdfasdf',
+      sku: 'asdfasdf',
+      quantity: 4,
+    },
+    {
+      name: 'Gatorade - Lemon-Lime',
+      type: 'beverage',
+      imageUrl: 'asdfasdf',
+      sku: 'asdfasdf',
+      quantity: 7,
+    },
+    {
+      name: 'Gatorade - Orange',
+      type: 'beverage',
+      imageUrl: 'asdfasdf',
+      sku: 'asdfasdf',
+      quantity: 2,
+    },
+  ],
 }
 
 const data2: IMachine = {
