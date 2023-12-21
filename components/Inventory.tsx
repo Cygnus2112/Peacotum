@@ -30,24 +30,26 @@ export const ProductItem = ({ product }: { product: Product}) => {
 
   return (
     <View style={[styles.product, borderColor]}>
-      <Image
-        source={require('../assets/vending-machine.jpeg')} // will change to imageUrl
-        style={styles.image}
-        height={50}
-        width={50}
-        resizeMode="contain"
-      />
-      <View>
-        <Text style={[styles.title, textColor]}>
-          { name }
-        </Text>
-        <Text style={[styles.type, textColor]}>
-          { type }
-        </Text>
+      <View style={{flexDirection: 'row', alignItems: 'center'}}>
+        <Image
+          source={require('../assets/vending-machine.jpeg')} // will change to imageUrl
+          style={styles.image}
+          height={50}
+          width={50}
+          resizeMode="contain"
+        />
+        <View>
+          <Text style={[styles.title, textColor]}>
+            { name }
+          </Text>
+          <Text style={[styles.type, textColor]}>
+            { type }
+          </Text>
+        </View>
       </View>
       <Pressable>
         <View style={styles.quantity}>
-          <Text>
+          <Text style={styles.quantityText}>
             { quantity.toString() }
           </Text>
         </View>
@@ -74,7 +76,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'column',
     width: '100%',
-    paddingHorizontal: 5,
+    paddingHorizontal: 8,
     paddingVertical: 12,
   },
   image: {
@@ -84,6 +86,7 @@ const styles = StyleSheet.create({
     height: 50,
     width: 50,
     backgroundColor: 'white',
+    marginRight: 5,
   },
   info: {
     flexDirection: 'column',
@@ -102,13 +105,24 @@ const styles = StyleSheet.create({
   product: {
     width: '100%',
     flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingVertical: 8,
+    borderBottomColor: 'rgba(0, 0, 0, 0.3)',
+    borderBottomWidth: 1,
   },
   quantity: {
     borderColor: 'rgba(0, 0, 0, 0.3)',
     borderRadius: 5,
     borderWidth: 1,
-    height: 50,
-    width: 50,
+    height: 40,
+    width: 40,
     backgroundColor: 'white',
-  }
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  quantityText: {
+    fontSize: 20,
+    fontWeight: '500',
+  },
 });
