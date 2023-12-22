@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react';
+import React, { PropsWithChildren, useState } from 'react';
 import {
   StyleSheet,
   Image,
@@ -8,6 +8,7 @@ import {
 import { Text } from './Text';
 import { View } from './View';
 import { useThemeStyle } from '../hooks/useThemeStyle';
+import { InventoryInput } from './InventoryInput';
 
 export type Product = {
   name: string;
@@ -18,6 +19,7 @@ export type Product = {
 }
 
 export const ProductItem = ({ product }: { product: Product}) => {
+  const [showQuantityModal, setShowQuantityModal] = useState(false);
   const { listItemColor, listItemBorderColor } = useThemeStyle();
   const textColor = {
     color: listItemColor,
@@ -27,6 +29,14 @@ export const ProductItem = ({ product }: { product: Product}) => {
   }
 
   const { name, type, quantity } = product;
+
+  const handleQuantityPress = () => {
+    setShowQuantityModal(true);
+  }
+
+  const handleSave = () => {
+    console.log('save pressed')
+  }
 
   return (
     <View style={[styles.product, borderColor]}>
@@ -47,13 +57,20 @@ export const ProductItem = ({ product }: { product: Product}) => {
           </Text>
         </View>
       </View>
-      <Pressable>
+      <Pressable onPress={handleQuantityPress}>
         <View style={styles.quantity}>
           <Text style={styles.quantityText}>
             { quantity.toString() }
           </Text>
         </View>
       </Pressable>
+      {showQuantityModal && (
+        <InventoryInput
+          quantity={quantity}
+          onCancel={() => setShowQuantityModal(false)}
+          onSave={handleSave}
+        />
+      )}
     </View>
   )
 }
