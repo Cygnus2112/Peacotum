@@ -69,6 +69,7 @@ export const ProductItem = ({ product }: { product: Product}) => {
           quantity={quantity}
           onCancel={() => setShowQuantityModal(false)}
           onSave={handleSave}
+          productName={name}
         />
       )}
     </View>
