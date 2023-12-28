@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -11,14 +11,32 @@ import { IMachine } from '../components/Machine';
 import { useThemeStyle } from '../hooks/useThemeStyle';
 import { Inventory } from '../components/Inventory';
 
+type InventoryUpdateData = {
+  id: number;
+  quantity: number;
+}
+
+type MachineUpdateData = {
+  id: number;
+  inventory: InventoryUpdateData[];
+}
+
 export const MachineScreen = ({ route }) => { // Todo: typing
   const themeStyles = useThemeStyle();
   const { params: { item }} = route;
-  const { title, type, imageUrl, inventory, address} = item as IMachine;
+  const { id, title, type, imageUrl, inventory, address} = item as IMachine;
 
   const backgroundStyle = {
     backgroundColor: themeStyles.backgroundColor,
   };
+
+  const handleSaveInventory = useCallback((data: InventoryUpdateData) => {
+    const machineUpdateData: MachineUpdateData = {
+      id, 
+      inventory: [data],
+    }
+    console.log('data: ', machineUpdateData);
+  }, [id]);
 
   return (
     <SafeAreaView style={[styles.container, backgroundStyle]}>
@@ -32,7 +50,7 @@ export const MachineScreen = ({ route }) => { // Todo: typing
         <View style={styles.section}>
           <Text style={styles.addressText}>{type}</Text>
         </View>
-        <Inventory inventory={inventory} />
+        <Inventory inventory={inventory} onSaveInventory={handleSaveInventory} />
       </ScrollView>
     </SafeAreaView>
   );

@@ -11,6 +11,7 @@ import { useThemeStyle } from '../hooks/useThemeStyle';
 import { useNavigation } from '@react-navigation/native';
 
 type Product = {
+  id: number;
   name: string;
   type: string; // drink, snack, etc.
   sku: string;
@@ -19,6 +20,7 @@ type Product = {
 }
 
 export type IMachine = {
+  id: number;
   type: string; // type of vending machine
   imageUrl: string; // if no url, default to logo
   title: string; // this will likely be an address

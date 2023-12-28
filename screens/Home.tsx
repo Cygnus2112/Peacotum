@@ -13,12 +13,14 @@ import { MachineListItem, IMachine } from '../components/Machine';
 import { useThemeStyle } from '../hooks/useThemeStyle';
 
 const data: IMachine = {
+  id: 0,
   title: 'Civic Center Lobby',
   address: '1234 Fake Avenue, Ste #100, Los Angeles, CA',
   type: 'Snack',
   imageUrl: 'fakeurl',
   inventory: [
     {
+      id: 0,
       name: 'Coca-Cola',
       type: 'beverage',
       imageUrl: 'asdfasdf',
@@ -26,6 +28,7 @@ const data: IMachine = {
       quantity: 6,
     },
     {
+      id: 1,
       name: 'Diet Coke',
       type: 'beverage',
       imageUrl: 'asdfasdf',
@@ -33,6 +36,7 @@ const data: IMachine = {
       quantity: 4,
     },
     {
+      id: 2,
       name: 'Gatorade - Lemon-Lime',
       type: 'beverage',
       imageUrl: 'asdfasdf',
@@ -40,6 +44,7 @@ const data: IMachine = {
       quantity: 7,
     },
     {
+      id: 3,
       name: 'Gatorade - Orange',
       type: 'beverage',
       imageUrl: 'asdfasdf',
@@ -50,6 +55,7 @@ const data: IMachine = {
 }
 
 const data2: IMachine = {
+  id: 1,
   title: 'Cedars Waiting Room',
   address: '1234 Fake Avenue, Ste #100, Los Angeles, CA',
   type: 'Beverage',

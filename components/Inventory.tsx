@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useState } from 'react';
+import React, { PropsWithChildren, useCallback, useState } from 'react';
 import {
   StyleSheet,
   Image,
@@ -11,6 +11,7 @@ import { useThemeStyle } from '../hooks/useThemeStyle';
 import { InventoryInput } from './InventoryInput';
 
 export type Product = {
+  id: number;
   name: string;
   type: string; // drink, snack, etc.
   sku: string;
@@ -18,7 +19,17 @@ export type Product = {
   quantity: number;
 }
 
-export const ProductItem = ({ product }: { product: Product}) => {
+type InventoryUpdateData = {
+  id: number;
+  quantity: number;
+}
+
+type ProductItemProps = {
+  product: Product;
+  onSaveInventory: (data: InventoryUpdateData) => void;
+}
+
+export const ProductItem = ({ product, onSaveInventory }: ProductItemProps) => {
   const [showQuantityModal, setShowQuantityModal] = useState(false);
   const { listItemColor, listItemBorderColor } = useThemeStyle();
   const textColor = {
@@ -28,15 +39,19 @@ export const ProductItem = ({ product }: { product: Product}) => {
     borderBottomColor: listItemBorderColor,
   }
 
-  const { name, type, quantity } = product;
+  const { id, name, type, quantity } = product;
 
   const handleQuantityPress = () => {
     setShowQuantityModal(true);
   }
 
-  const handleSave = () => {
+  const handleSave = useCallback((quantity: number) => {
     console.log('save pressed')
-  }
+    onSaveInventory({
+      id,
+      quantity
+    });
+  }, [onSaveInventory]);
 
   return (
     <View style={[styles.product, borderColor]}>
@@ -78,13 +93,14 @@ export const ProductItem = ({ product }: { product: Product}) => {
 
 type InventoryProps = PropsWithChildren<{
   inventory: Product[];
+  onSaveInventory: (data: InventoryUpdateData) => void;
 }>;
 
-export const Inventory = ({ inventory }: InventoryProps) => {
+export const Inventory = ({ inventory, onSaveInventory }: InventoryProps) => {
   return (
     <View style={styles.container}>
       {inventory.map((item: Product) => {
-        return <ProductItem product={item} />
+        return <ProductItem product={item} onSaveInventory={onSaveInventory} />
       })}
     </View>
   );

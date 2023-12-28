@@ -1,7 +1,6 @@
 import React, { PropsWithChildren, useState } from 'react';
 import {
   StyleSheet,
-  Image,
   Pressable,
   Modal,
   TextInput,
@@ -9,15 +8,13 @@ import {
 
 import { Text } from './Text';
 import { View } from './View';
-import { useThemeStyle } from '../hooks/useThemeStyle';
 
-
-type InventoryInputProps = PropsWithChildren<{
+type InventoryInputProps = {
   quantity: number;
-  onSave: () => void;
+  onSave: (quantity: number) => void;
   onCancel: () => void;
   productName: string;
-}>;
+};
 
 export const InventoryInput = ({ quantity, onSave, onCancel, productName }: InventoryInputProps) => {
   const [updatedQuantity, setUpdatedQuantity] = useState(quantity.toString());
@@ -49,7 +46,7 @@ export const InventoryInput = ({ quantity, onSave, onCancel, productName }: Inve
             </Pressable>
             <Pressable
               style={styles.button}
-              onPress={onSave}
+              onPress={() => onSave(Number(updatedQuantity))}
             >
               <Text style={styles.saveText}>
                 Save
