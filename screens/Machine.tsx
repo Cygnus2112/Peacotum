@@ -35,7 +35,6 @@ export const MachineScreen = ({ route }) => { // Todo: typing
       id, 
       inventory: [data],
     }
-    console.log('data: ', machineUpdateData);
   }, [id]);
 
   return (
