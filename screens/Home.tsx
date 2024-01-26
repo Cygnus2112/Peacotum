@@ -1,60 +1,100 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import {
   SafeAreaView,
-  ScrollView,
-  StatusBar,
   StyleSheet,
-  Text,
   useColorScheme,
-  View,
+  Appearance,
+  FlatList
 } from 'react-native';
-import { Section } from '../components/Section';
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import { Toggle } from '../components/Toggle';
+import { View } from '../components/View';
+import { MachineListItem, IMachine } from '../components/Machine';
+
+import { useThemeStyle } from '../hooks/useThemeStyle';
+
+const data: IMachine = {
+  id: 0,
+  title: 'Civic Center Lobby',
+  address: '1234 Fake Avenue, Ste #100, Los Angeles, CA',
+  type: 'Snack',
+  imageUrl: 'fakeurl',
+  inventory: [
+    {
+      id: 0,
+      name: 'Coca-Cola',
+      type: 'beverage',
+      imageUrl: 'asdfasdf',
+      sku: 'asdfasdf',
+      quantity: 6,
+    },
+    {
+      id: 1,
+      name: 'Diet Coke',
+      type: 'beverage',
+      imageUrl: 'asdfasdf',
+      sku: 'asdfasdf',
+      quantity: 4,
+    },
+    {
+      id: 2,
+      name: 'Gatorade - Lemon-Lime',
+      type: 'beverage',
+      imageUrl: 'asdfasdf',
+      sku: 'asdfasdf',
+      quantity: 7,
+    },
+    {
+      id: 3,
+      name: 'Gatorade - Orange',
+      type: 'beverage',
+      imageUrl: 'asdfasdf',
+      sku: 'asdfasdf',
+      quantity: 2,
+    },
+  ],
+}
+
+const data2: IMachine = {
+  id: 1,
+  title: 'Cedars Waiting Room',
+  address: '1234 Fake Avenue, Ste #100, Los Angeles, CA',
+  type: 'Beverage',
+  imageUrl: 'fakeurl',
+  inventory: [],
+}
+
+const machines = [data, data2];
 
 export const HomeScreen = () => {
-  const isDarkMode = useColorScheme() === 'dark';
+  const scheme = useColorScheme();
+  const isDarkMode = scheme === 'dark';
+  const themeStyles = useThemeStyle();
 
   const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+    backgroundColor: themeStyles.backgroundColor,
   };
 
+  const toggleScheme = useCallback(() => {
+    const newScheme = isDarkMode ? 'light' : 'dark';
+    Appearance.setColorScheme(newScheme);
+  }, [isDarkMode]);
+
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
+    <View style={[styles.container, backgroundStyle]}>
+      <View>
+        <Toggle
+          onToggle={toggleScheme}
+          enabled={!isDarkMode}
+        />
+      </View>
+      <FlatList
+        contentContainerStyle={backgroundStyle}
+        data={machines}
+        renderItem={({item, index}) => {
+          return <MachineListItem machine={item} key={index.toString()} />
+        }}
       />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 }
 
@@ -62,4 +102,7 @@ const styles = StyleSheet.create({
   highlight: {
     fontWeight: '700',
   },
+  container: {
+    flex: 1,
+  }
 });
